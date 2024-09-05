@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    client_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'client',
-        required: true,
-    },
     first_name: {
         type: String,
         required: true,
@@ -25,9 +20,18 @@ const userSchema = new Schema({
         required: true,
         unique: true,
     },
+    password: {
+        type: String,
+        required: true,
+    },
+    pan_no: {
+        type: String,
+        unique: true,
+    },
+    device_list: [String],
     user_type: {
         type: String,
-        enum: ['admin', 'client_user'],
+        enum: ['super_admin','admin', 'client_user'],
         default: 'client_user',
     },
     profile_picture: String,
@@ -43,6 +47,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    is_company_registred:{
+        type:Boolean,
+        default:false
+    }
 }, {
     timestamps: true
 });
